@@ -171,7 +171,4 @@ document.addEventListener("DOMContentLoaded", function () {
         gameMode = "two";
         startButton.style.display = "inline-block";
         resetButton.style.display = "inline-block";
-        backButton.style.display = "inline-block";
-        modeSelection.style.display = "none";
-    });
-
+        backButton.style.display = "inline

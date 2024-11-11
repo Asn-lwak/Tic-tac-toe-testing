@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const singlePlayerButton = document.getElementById("single-player-button");
+    const twoPlayerButton = document.getElementById("two-player-button");
     const startButton = document.getElementById("start-button");
     const resetButton = document.getElementById("reset-button");
     const board = document.querySelector(".board");
@@ -6,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentPlayerDisplay = document.getElementById("current-player");
     let currentPlayer = "X";
     let boardArray = ["", "", "", "", "", "", "", "", ""];
+    let gameMode = "";
 
     function checkWinner() {
         const winPatterns = [
@@ -40,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const cell = event.target;
         const cellIndex = Array.from(board.children).indexOf(cell);
 
-        if (boardArray[cellIndex] === "" && !checkWinner() && currentPlayer === "X") {
+        if (boardArray[cellIndex] === "" && !checkWinner()) {
             boardArray[cellIndex] = currentPlayer;
             cell.textContent = currentPlayer;
 
@@ -52,9 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     result.textContent = `${winner} wins!`;
                 }
             } else {
-                currentPlayer = "O";
-                currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
-                aiMove();
+                if (gameMode === "single") {
+                    currentPlayer = "O";
+                    currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+                    aiMove();
+                } else {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                    currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+                }
             }
         }
     }
@@ -129,6 +137,22 @@ document.addEventListener("DOMContentLoaded", function () {
             board.appendChild(cell);
         }
     }
+
+    singlePlayerButton.addEventListener("click", () => {
+        gameMode = "single";
+        startButton.style.display = "inline-block";
+        resetButton.style.display = "inline-block";
+        singlePlayerButton.style.display = "none";
+        twoPlayerButton.style.display = "none";
+    });
+
+    twoPlayerButton.addEventListener("click", () => {
+        gameMode = "two";
+        startButton.style.display = "inline-block";
+        resetButton.style.display = "inline-block";
+        singlePlayerButton.style.display = "none";
+        twoPlayerButton.style.display = "none";
+    });
 
     startButton.addEventListener("click", startGame);
     resetButton.addEventListener("click", resetGame);

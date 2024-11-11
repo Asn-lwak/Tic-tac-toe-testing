@@ -175,7 +175,3 @@ document.addEventListener("DOMContentLoaded", function () {
         modeSelection.style.display = "none";
     });
 
-    startButton.addEventListener("click", startGame);
-    resetButton.addEventListener("click", resetGame);
-    backButton.addEventListener("click", goBack);
-});

@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const cell = event.target;
         const cellIndex = Array.from(board.children).indexOf(cell);
 
-        if (boardArray[cellIndex] === "" && !checkWinner()) {
+        if (boardArray[cellIndex] === "" && !checkWinner() && currentPlayer === "X") {
             boardArray[cellIndex] = currentPlayer;
             cell.textContent = currentPlayer;
 
@@ -52,7 +52,29 @@ document.addEventListener("DOMContentLoaded", function () {
                     result.textContent = `${winner} wins!`;
                 }
             } else {
-                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                currentPlayer = "O";
+                currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+                aiMove();
+            }
+        }
+    }
+
+    function aiMove() {
+        let emptyCells = boardArray.map((val, index) => val === "" ? index : null).filter(val => val !== null);
+        if (emptyCells.length > 0 && !checkWinner()) {
+            let randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            boardArray[randomIndex] = currentPlayer;
+            board.children[randomIndex].textContent = currentPlayer;
+
+            const winner = checkWinner();
+            if (winner) {
+                if (winner === "Tie") {
+                    result.textContent = "It's a tie!";
+                } else {
+                    result.textContent = `${winner} wins!`;
+                }
+            } else {
+                currentPlayer = "X";
                 currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
             }
         }

@@ -172,4 +172,10 @@ document.addEventListener("DOMContentLoaded", function () {
         startButton.style.display = "inline-block";
         resetButton.style.display = "inline-block";
         backButton.style.display = "inline-block";
-        modeSelection.style.display = "
+        modeSelection.style.display = "none";
+    });
+
+    startButton.addEventListener("click", startGame);
+    resetButton.addEventListener("click", resetGame);
+    backButton.addEventListener("click", goBack);
+});

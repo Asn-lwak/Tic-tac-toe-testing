@@ -10,6 +10,30 @@ body {
 
 .container {
     text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 .board {
@@ -27,4 +51,14 @@ body {
     justify-content: center;
     font-size: 2em;
     border: 1px solid #000;
+    transition: background-color 0.3s;
+}
+
+.board div:hover {
+    background-color: #ddd;
+}
+
+#current-player, #result {
+    margin-top: 20px;
+    font-size: 18px;
 }

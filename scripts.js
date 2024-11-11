@@ -130,11 +130,12 @@ document.addEventListener("DOMContentLoaded", function () {
     startButton.addEventListener("click", startGame);
 
     resetButton.addEventListener("click", function () {
-        const confirmReset = confirm("Are you sure you want to reset the game?");
-        if (confirmReset) {
-            startGame();
-        }
-    });
+    const confirmReset = window.confirm("Are you sure you want to reset the game?");
+    if (confirmReset) {
+        startGame();
+    }
+});
+
 
     backButton.addEventListener("click", function () {
         modeSelection.style.display = "block";

@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let boardArray = ["", "", "", "", "", "", "", "", ""];
     let gameMode = "";
 
+    function logMessage(message) {
+        console.log(message);
+        alert(message); // Use alerts to ensure messages are seen
+    }
+
     function checkWinner() {
         const winPatterns = [
             [0, 1, 2],
@@ -92,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function startGame() {
+        logMessage("Starting game...");
         boardArray = ["", "", "", "", "", "", "", "", ""];
         result.textContent = "";
         currentPlayer = "X";
@@ -118,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function resetGame() {
         if (confirm("Are you sure you want to reset the game?")) {
+            logMessage("Resetting game...");
             boardArray = ["", "", "", "", "", "", "", "", ""];
             result.textContent = "";
             currentPlayer = "X";
@@ -144,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function goBack() {
+        logMessage("Going back to mode selection...");
         gameMode = "";
         startButton.style.display = "none";
         resetButton.style.display = "none";
@@ -160,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     singlePlayerButton.addEventListener("click", () => {
+        logMessage("Single Player mode selected");
         gameMode = "single";
         startButton.style.display = "inline-block";
         resetButton.style.display = "inline-block";
@@ -168,7 +177,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     twoPlayerButton.addEventListener("click", () => {
+        logMessage("Two Player mode selected");
         gameMode = "two";
         startButton.style.display = "inline-block";
         resetButton.style.display = "inline-block";
-        backButton.style.display = "inline
+        backButton.style.display = "inline-block";
+        modeSelection.style.display = "none";
+    });
+
+    startButton.addEventListener("click", startGame);
+    resetButton.addEventListener("click", resetGame);
+    backButton.addEventListener("click", goBack);
+});

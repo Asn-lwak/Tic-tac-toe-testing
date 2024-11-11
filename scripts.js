@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("start-button");
+    const resetButton = document.getElementById("reset-button");
     const board = document.querySelector(".board");
     const result = document.getElementById("result");
     const currentPlayerDisplay = document.getElementById("current-player");
@@ -82,6 +83,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function resetGame() {
+        boardArray = ["", "", "", "", "", "", "", "", ""];
+        result.textContent = "";
+        currentPlayer = "X";
+        currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+
+        while (board.firstChild) {
+            board.removeChild(board.firstChild);
+        }
+
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement("div");
+            cell.addEventListener("click", handleClick);
+            cell.style.backgroundColor = "#eee";
+            cell.style.width = "100px";
+            cell.style.height = "100px";
+            cell.style.display = "inline-block";
+            cell.style.border = "1px solid #000";
+            cell.style.fontSize = "2em";
+            cell.style.textAlign = "center";
+            cell.style.lineHeight = "100px";
+            board.appendChild(cell);
+        }
+    }
+
     startButton.addEventListener("click", startGame);
+    resetButton.addEventListener("click", resetGame);
 });
-          

@@ -109,83 +109,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (let i = 0; i < 9; i++) {
             const cell = document.createElement("div");
+            cell.classList.add("cell");
             cell.addEventListener("click", handleClick);
-            cell.style.backgroundColor = "#eee";
-            cell.style.width = "100px";
-            cell.style.height = "100px";
-            cell.style.display = "inline-block";
-            cell.style.border = "1px solid #000";
-            cell.style.fontSize = "2em";
-            cell.style.textAlign = "center";
-            cell.style.lineHeight = "100px";
             board.appendChild(cell);
         }
     }
 
-    function resetGame() {
-        if (confirm("Are you sure you want to reset the game?")) {
-            logMessage("Resetting game...");
-            boardArray = ["", "", "", "", "", "", "", "", ""];
-            result.textContent = "";
-            currentPlayer = "X";
-            currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+    singlePlayerButton.addEventListener("click", function () {
+        gameMode = "single";
+        modeSelection.style.display = "none";
+        gameControls.style.display = "block";
+    });
 
-            while (board.firstChild) {
-                board.removeChild(board.firstChild);
-            }
+    twoPlayerButton.addEventListener("click", function () {
+        gameMode = "two";
+        modeSelection.style.display = "none";
+        gameControls.style.display = "block";
+    });
 
-            for (let i = 0; i < 9; i++) {
-                const cell = document.createElement("div");
-                cell.addEventListener("click", handleClick);
-                cell.style.backgroundColor = "#eee";
-                cell.style.width = "100px";
-                cell.style.height = "100px";
-                cell.style.display = "inline-block";
-                cell.style.border = "1px solid #000";
-                cell.style.fontSize = "2em";
-                cell.style.textAlign = "center";
-                cell.style.lineHeight = "100px";
-                board.appendChild(cell);
-            }
-        }
-    }
+    startButton.addEventListener("click", startGame);
 
-    function goBack() {
-        logMessage("Going back to mode selection...");
-        gameMode = "";
-        startButton.style.display = "none";
-        resetButton.style.display = "none";
-        backButton.style.display = "none";
+    resetButton.addEventListener("click", startGame);
+
+    backButton.addEventListener("click", function () {
         modeSelection.style.display = "block";
+        gameControls.style.display = "none";
         boardArray = ["", "", "", "", "", "", "", "", ""];
         result.textContent = "";
         currentPlayer = "X";
         currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
-
         while (board.firstChild) {
             board.removeChild(board.firstChild);
         }
-    }
-
-    singlePlayerButton.addEventListener("click", () => {
-        logMessage("Single Player mode selected");
-        gameMode = "single";
-        startButton.style.display = "inline-block";
-        resetButton.style.display = "inline-block";
-        backButton.style.display = "inline-block";
-        modeSelection.style.display = "none";
     });
-
-    twoPlayerButton.addEventListener("click", () => {
-        logMessage("Two Player mode selected");
-        gameMode = "two";
-        startButton.style.display = "inline-block";
-        resetButton.style.display = "inline-block";
-        backButton.style.display = "inline-block";
-        modeSelection.style.display = "none";
-    });
-
-    startButton.addEventListener("click", startGame);
-    resetButton.addEventListener("click", resetGame);
-    backButton.addEventListener("click", goBack);
 });

@@ -130,52 +130,64 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function resetGame() {
-        logMessage("Game reset");
-        boardArray = ["", "", "", "", "", "", "", "", ""];
-        result.textContent = "";
-        currentPlayer = "X";
-        currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+        const confirmReset = window.confirm("Are you sure you want to reset the game?");
+        if (confirmReset) {
+            logMessage("Game reset");
+            boardArray = ["", "", "", "", "", "", "", "", ""];
+            result.textContent = "";
+            currentPlayer = "X";
+            currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
 
-        Array.from(board.children).forEach(cell => {
-            cell.textContent = "";
-            cell.style.backgroundColor = "";
-        });
+            Array.from(board.children).forEach(cell => {
+                cell.textContent = "";
+                cell.style.backgroundColor = "";
+            });
+        }
     }
 
-    singlePlayerButton.addEventListener("click", () => {
+    singlePlayerButton.addEventListener("click", function () {
         gameMode = "single";
+        modeSelection.style.display = "none";
         difficultySelection.style.display = "block";
-        gameControls.style.display = "none";
     });
 
-    twoPlayerButton.addEventListener("click", () => {
+    twoPlayerButton.addEventListener("click", function () {
         gameMode = "two";
-        difficultySelection.style.display = "none";
+        modeSelection.style.display = "none";
         gameControls.style.display = "block";
     });
 
-    easyButton.addEventListener("click", () => {
+    easyButton.addEventListener("click", function () {
         difficulty = "easy";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
     });
 
-    mediumButton.addEventListener("click", () => {
+    mediumButton.addEventListener("click", function () {
         difficulty = "medium";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
     });
 
-    hardButton.addEventListener("click", () => {
+    hardButton.addEventListener("click", function () {
         difficulty = "hard";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
     });
 
     startButton.addEventListener("click", startGame);
+
     resetButton.addEventListener("click", resetGame);
-    backButton.addEventListener("click", () => {
-        difficultySelection.style.display = "none";
+
+    backButton.addEventListener("click", function () {
+        modeSelection.style.display = "block";
         gameControls.style.display = "none";
+        boardArray = ["", "", "", "", "", "", "", "", ""];
+        result.textContent = "";
+        currentPlayer = "X";
+        currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+        while (board.firstChild) {
+            board.removeChild(board.firstChild);
+        }
     });
 });

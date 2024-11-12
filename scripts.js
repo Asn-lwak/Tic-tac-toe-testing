@@ -149,30 +149,35 @@ document.addEventListener("DOMContentLoaded", function () {
         gameMode = "single";
         modeSelection.style.display = "none";
         difficultySelection.style.display = "block";
+        currentPlayerDisplay.style.display = "none"; // Hide current player display
     });
 
     twoPlayerButton.addEventListener("click", function () {
         gameMode = "two";
         modeSelection.style.display = "none";
         gameControls.style.display = "block";
+        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
     easyButton.addEventListener("click", function () {
         difficulty = "easy";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
+        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
     mediumButton.addEventListener("click", function () {
         difficulty = "medium";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
+        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
     hardButton.addEventListener("click", function () {
         difficulty = "hard";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
+        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
     startButton.addEventListener("click", startGame);
@@ -187,6 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         result.textContent = "";
         currentPlayer = "X";
         currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+        currentPlayerDisplay.style.display = "none"; // Hide current player display
         while (board.firstChild) {
             board.removeChild(board.firstChild);
         }

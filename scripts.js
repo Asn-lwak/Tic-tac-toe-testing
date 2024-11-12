@@ -182,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     backButton.addEventListener("click", function () {
         modeSelection.style.display = "block";
         gameControls.style.display = "none";
+        difficultySelection.style.display = "none";
         boardArray = ["", "", "", "", "", "", "", "", ""];
         result.textContent = "";
         currentPlayer = "X";

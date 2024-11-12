@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         result.textContent = "";
         currentPlayer = "X";
         currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
+        currentPlayerDisplay.style.display = "block"; // Show current player display when game starts
 
         while (board.firstChild) {
             board.removeChild(board.firstChild);
@@ -163,27 +164,21 @@ document.addEventListener("DOMContentLoaded", function () {
         difficulty = "easy";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
-        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
     mediumButton.addEventListener("click", function () {
         difficulty = "medium";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
-        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
     hardButton.addEventListener("click", function () {
         difficulty = "hard";
         difficultySelection.style.display = "none";
         gameControls.style.display = "block";
-        currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
-    startButton.addEventListener("click", function () {
-        currentPlayerDisplay.style.display = "block"; // Show current player display before starting the game
-        startGame();
-    });
+    startButton.addEventListener("click", startGame);
 
     resetButton.addEventListener("click", resetGame);
 

@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         gameMode = "two";
         modeSelection.style.display = "none";
         gameControls.style.display = "block";
-        currentPlayerDisplay.style.display = "block"; // Show current player display
+        currentPlayerDisplay.style.display = "none"; // Hide current player display
     });
 
     easyButton.addEventListener("click", function () {
@@ -180,7 +180,10 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPlayerDisplay.style.display = "block"; // Show current player display
     });
 
-    startButton.addEventListener("click", startGame);
+    startButton.addEventListener("click", function () {
+        currentPlayerDisplay.style.display = "block"; // Show current player display before starting the game
+        startGame();
+    });
 
     resetButton.addEventListener("click", resetGame);
 

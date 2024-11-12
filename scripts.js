@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let gameMode = "";
     let difficulty = "easy";
 
+    // Hide the current player display initially
+    currentPlayerDisplay.style.display = "none";
+
     function logMessage(message) {
         console.log(message);
         alert(message); // Use alerts to ensure messages are seen

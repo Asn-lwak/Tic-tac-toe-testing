@@ -6,12 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const backButton = document.getElementById("back-button");
     const modeSelection = document.getElementById("mode-selection");
     const gameControls = document.getElementById("game-controls");
+    const difficultySelection = document.getElementById("difficulty-selection");
+    const easyButton = document.getElementById("easy-button");
+    const mediumButton = document.getElementById("medium-button");
+    const hardButton = document.getElementById("hard-button");
     const board = document.querySelector(".board");
     const result = document.getElementById("result");
     const currentPlayerDisplay = document.getElementById("current-player");
     let currentPlayer = "X";
     let boardArray = ["", "", "", "", "", "", "", "", ""];
     let gameMode = "";
+    let difficulty = "easy";
 
     function logMessage(message) {
         console.log(message);
@@ -78,9 +83,18 @@ document.addEventListener("DOMContentLoaded", function () {
     function aiMove() {
         let emptyCells = boardArray.map((val, index) => val === "" ? index : null).filter(val => val !== null);
         if (emptyCells.length > 0 && !checkWinner()) {
-            let randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-            boardArray[randomIndex] = currentPlayer;
-            board.children[randomIndex].textContent = currentPlayer;
+            let moveIndex;
+            if (difficulty === "easy") {
+                moveIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            } else if (difficulty === "medium") {
+                // Implement medium difficulty logic here
+                moveIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            } else if (difficulty === "hard") {
+                // Implement hard difficulty logic here
+                moveIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            }
+            boardArray[moveIndex] = currentPlayer;
+            board.children[moveIndex].textContent = currentPlayer;
 
             const winner = checkWinner();
             if (winner) {
@@ -115,37 +129,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    singlePlayerButton.addEventListener("click", function () {
-        gameMode = "single";
-        modeSelection.style.display = "none";
-        gameControls.style.display = "block";
-    });
-
-    twoPlayerButton.addEventListener("click", function () {
-        gameMode = "two";
-        modeSelection.style.display = "none";
-        gameControls.style.display = "block";
-    });
-
-    startButton.addEventListener("click", startGame);
-
-    resetButton.addEventListener("click", function () {
-    const confirmReset = window.confirm("Are you sure you want to reset the game?");
-    if (confirmReset) {
-        startGame();
-    }
-});
-
-
-    backButton.addEventListener("click", function () {
-        modeSelection.style.display = "block";
-        gameControls.style.display = "none";
+    function resetGame() {
+        logMessage("Game reset");
         boardArray = ["", "", "", "", "", "", "", "", ""];
         result.textContent = "";
         currentPlayer = "X";
         currentPlayerDisplay.textContent = `Current Player: ${currentPlayer}`;
-        while (board.firstChild) {
-            board.removeChild(board.firstChild);
-        }
+
+        Array.from(board.children).forEach(cell => {
+            cell.textContent = "";
+            cell.style.backgroundColor = "";
+        });
+    }
+
+    singlePlayerButton.addEventListener("click", () => {
+        gameMode = "single";
+        difficultySelection.style.display = "block";
+        gameControls.style.display = "none";
+    });
+
+    twoPlayerButton.addEventListener("click", () => {
+        gameMode = "two";
+        difficultySelection.style.display = "none";
+        gameControls.style.display = "block";
+    });
+
+    easyButton.addEventListener("click", () => {
+        difficulty = "easy";
+        difficultySelection.style.display = "none";
+        gameControls.style.display = "block";
+    });
+
+    mediumButton.addEventListener("click", () => {
+        difficulty = "medium";
+        difficultySelection.style.display = "none";
+        gameControls.style.display = "block";
+    });
+
+    hardButton.addEventListener("click", () => {
+        difficulty = "hard";
+        difficultySelection.style.display = "none";
+        gameControls.style.display = "block";
+    });
+
+    startButton.addEventListener("click", startGame);
+    resetButton.addEventListener("click", resetGame);
+    backButton.addEventListener("click", () => {
+        difficultySelection.style.display = "none";
+        gameControls.style.display = "none";
     });
 });
